@@ -96,8 +96,9 @@ async function setCardsField(cardId) {
 
     let computerCardId = await getRandomCardId();
 
-    state.fieldCards.player.style.display = "block";
-    state.fieldCards.computer.style.display = "block";
+    showHiddenCardFieldsImage(true);
+
+    await hiddenCardDetails();
 
     state.fieldCards.player.src = cardData[cardId].img;
     state.fieldCards.computer.src = cardData[computerCardId].img;
@@ -106,6 +107,25 @@ async function setCardsField(cardId) {
 
     await updateScore();
     await drawButton(duelResults);
+}
+async function showHiddenCardFieldsImage(value) {
+
+    if(value === true){
+        state.fieldCards.player.style.display = "block";
+        state.fieldCards.computer.style.display = "block";
+    }
+    else{
+        state.fieldCards.player.style.display = "none";
+        state.fieldCards.computer.style.display = "none";
+    }
+    
+}
+
+async function hiddenCardDetails() {
+    state.cardSprites.avatar.src = "";
+
+    state.cardSprites.name.innerText = "";
+    state.cardSprites.type.innerText = "";
 }
 
 async function checkDuelResults(playerCardId, computerCardId) {
@@ -173,9 +193,10 @@ async function playAudio(status) {
 }
 
 function init() {
+    
     drawCards(5, playerSides.player1);
     drawCards(5, playerSides.computer);
-
+    showHiddenCardFieldsImage(false);
 }
 
 init();
