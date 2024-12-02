@@ -203,6 +203,9 @@ function init() {
     drawCards(5, playerSides.player1);
     drawCards(5, playerSides.computer);
     showHiddenCardFieldsImage(false);
+
+    const bgm = document.getElementById("bgm");
+    bgm.play();
 }
 
 init();
